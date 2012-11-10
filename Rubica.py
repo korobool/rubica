@@ -16,8 +16,6 @@ class Cube():
 
     def rotate(self, direction):
 
-        previous_state = self.copy()
-
         if not direction in self.directions:
             print 'Cannot apply unsupported rotation:', direction
             return False
@@ -109,7 +107,7 @@ class Cube():
             self.rotate('F+')
 
         if not self.observer is None:
-            self.observer.notify('rotated', (previous_state, self, direction))
+            self.observer.notify('rotated', (self, direction))
 
     def is_equal_to(self, cube):
         return self.get_distance(cube) == 0
