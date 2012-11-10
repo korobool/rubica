@@ -1,5 +1,7 @@
 __author__ = 'oleksandr'
 
+# This file is just script for development and testing purposes for Rubica.Cube class
+
 import Rubica
 import ViewCube
 
