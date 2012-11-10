@@ -14,6 +14,8 @@ class Cube():
         if not self.observer is None:
             self.observer.notify('created', self)
 
+        self.previous_state = self.copy()
+
     def rotate(self, direction):
 
         previous_state = self.copy()
@@ -110,6 +112,8 @@ class Cube():
 
         if not self.observer is None:
             self.observer.notify('rotated', (previous_state, self, direction))
+
+        self.previous_state = previous_state
 
     def is_equal_to(self, cube):
         return self.get_distance(cube) == 0
