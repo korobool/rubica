@@ -7,4 +7,15 @@ __author__ = 'oleksandr'
 # class automaticaly)
 
 class Visualizer:
-    pass
+    def notify(self, notification, args):
+        print notification, args
+        if notification == 'created':
+            self.__init_drawing(args) # Init drawing window and subsystem
+        if notification == 'rotated':
+            self.__animate(args)
+
+    def __animate(self, args):
+        pass
+
+    def __init_drawing(self, args):
+        pass

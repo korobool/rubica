@@ -1,4 +1,3 @@
-
 __author__ = 'oleksandr'
 
 import copy
@@ -12,9 +11,15 @@ class Cube():
         self.observer = observer
         self.directions = ('L+', 'L-', 'R+', 'R-', 'U+', 'U-', 'D+', 'D-', 'B+', 'B-', 'F+', 'F-')
 
+        if not self.observer is None:
+            self.observer.notify('created', self)
+
     def rotate(self, direction):
+
+        previous_state = self.copy()
+
         if not direction in self.directions:
-            print 'Cannot do unsupported rotation:', direction
+            print 'Cannot apply unsupported rotation:', direction
             return False
 
         if direction == 'L+':
@@ -103,6 +108,9 @@ class Cube():
             self.rotate('F+')
             self.rotate('F+')
 
+        if not self.observer is None:
+            self.observer.notify('rotated', (previous_state, self, direction))
+
     def is_equal_to(self, cube):
         return self.get_distance(cube) == 0
 
@@ -163,4 +171,3 @@ class Cube():
         for f in self.fringe.keys():
             cube_diff += Cube.get_fringes_difference(self.fringe[f], cube.fringe[f])
         return cube_diff
-
