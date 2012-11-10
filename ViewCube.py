@@ -15,13 +15,10 @@ class Visualizer:
             self.__animate(args)
 
     def __animate(self, args):
-        # args = tuple (cube, operation)
+        # args = tuple (old_cube, cube, operation)
         # Insert your code here.
-        # If you need old cube state lookup self.previous_state variable
-        self.previous_state = args[0].copy()
         pass
 
     def __init_drawing(self, args):
         # args = cube
-        self.previous_state = args.copy()
         pass
