@@ -22,5 +22,6 @@ class Visualizer:
         pass
 
     def __init_drawing(self, args):
+        # args = cube
         self.previous_state = args.copy()
         pass
