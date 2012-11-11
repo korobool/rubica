@@ -19,16 +19,17 @@ class Visualizer:
         scene.center = (0, 0, 0)
         scene.forward = (-1, -1, -1)
         scene.scale = (0.2,0.2,0.2)
-        self.cube = {}
+        self.cube = []
         
     def axes(self):
         x = arrow(pos=(0,0,0), axis=(5,0,0), shaftwidth=0.1)
         y = arrow(pos=(0,0,0), axis=(0,0,5), shaftwidth=0.1)
         z = arrow(pos=(0,0,0), axis=(0,5,0), shaftwidth=0.1)
-    
-    def notify(self, notification, args):
+
+    #self.observer().notify('rotated', sender = self, args = (previous_state, direction))
+    def notify(self, notification, sender = None, args = None):
         if notification == 'created':
-            self.init_drawing(args) # Init drawing window and subsystem
+            self.init_drawing(sender) # Init drawing window and subsystem
         if notification == 'rotated':
             self.animate(args)
 
