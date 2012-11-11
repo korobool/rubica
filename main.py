@@ -11,7 +11,7 @@ cube.print_cube()
 
 old_cube = cube.copy()
 
-cube.randomize()
+cube.rotate('L+')
 
 cube.print_cube()
 

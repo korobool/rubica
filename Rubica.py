@@ -2,17 +2,19 @@ __author__ = 'oleksandr'
 
 import copy
 import random
+import weakref
+
 
 class Cube():
 
     def __init__(self, observer = None):
         self.fringe = {}
         self.__init__fringes()
-        self.observer = observer
+        self.observer = weakref.ref(observer)
         self.directions = ('L+', 'L-', 'R+', 'R-', 'U+', 'U-', 'D+', 'D-', 'B+', 'B-', 'F+', 'F-')
 
-        if not self.observer is None:
-            self.observer.notify('created', self)
+        if not self.observer() is None:
+            self.observer().notify('created', self)
 
         self.previous_state = self.copy()
 
@@ -110,8 +112,8 @@ class Cube():
             self.rotate('F+')
             self.rotate('F+')
 
-        if not self.observer is None:
-            self.observer.notify('rotated', (previous_state, self, direction))
+        if not self.observer() is None:
+            self.observer().notify('rotated', (previous_state, self, direction))
 
         self.previous_state = previous_state
 
@@ -137,8 +139,8 @@ class Cube():
     def __init__fringes(self):
         self.fringe['top'] = Cube.__gen_fringe('Y')
         self.fringe['front'] = Cube.__gen_fringe('R')
-        self.fringe['bottom'] = Cube.__gen_fringe('B')
-        self.fringe['back'] = Cube.__gen_fringe('W')
+        self.fringe['bottom'] = Cube.__gen_fringe('W')
+        self.fringe['back'] = Cube.__gen_fringe('B')
         self.fringe['left'] = Cube.__gen_fringe('G')
         self.fringe['right'] = Cube.__gen_fringe('O')
 
