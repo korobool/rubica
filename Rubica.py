@@ -4,21 +4,17 @@ import copy
 import random
 import weakref
 
-__global_visualizer = None
 
 class Cube():
-
+    __global_visualizer = None
     def __init__(self, observer = None):
-        global __global_visualizer
         self.fringe = {}
         self.__init__fringes()
-        self.observer = weakref.ref(observer)
-        __global_visualizer = observer
+        Cube.__global_visualizer = observer
         self.directions = ('L+', 'L-', 'R+', 'R-', 'U+', 'U-', 'D+', 'D-', 'B+', 'B-', 'F+', 'F-')
 
-        if not self.observer() is None:
-            # self.observer().notify('created', self)
-            self.observer().notify('created', sender = self)
+        if not Cube.__global_visualizer is None:
+            Cube.__global_visualizer.notify('created', sender = self)
 
         self.previous_state = self.copy()
 
@@ -114,10 +110,9 @@ class Cube():
             self.rotate('F+')
             self.rotate('F+')
             self.rotate('F+')
-            
-        if not self.observer() is None:
-            
-            self.observer().notify('rotated', sender = self, args = (previous_state, direction))
+
+        if not Cube.__global_visualizer is None:
+            Cube.__global_visualizer.notify('rotated', sender = self, args = (previous_state, direction))
 
         self.previous_state = previous_state
 
