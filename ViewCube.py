@@ -19,8 +19,7 @@ class Visualizer:
         scene.center = (0, 0, 0)
         scene.forward = (-1, -1, -1)
         scene.scale = (0.2,0.2,0.2)
-        self.cube = []
-        self.create = False
+        self.cube = {}
         
     def axes(self):
         x = arrow(pos=(0,0,0), axis=(5,0,0), shaftwidth=0.1)
@@ -30,13 +29,12 @@ class Visualizer:
     def notify(self, notification, args):
         if notification == 'created':
             self.init_drawing(args) # Init drawing window and subsystem
-            self.create = True
-        if self.create == True and notification == 'rotated':
+        if notification == 'rotated':
             self.animate(args)
 
     def animate(self, args):
-#        if args[2] == 'L+':
-#            self.L_pluse()
+        if args[2] == 'L+':
+            self.L_pluse()
         pass
 
     def init_drawing(self, args):
@@ -55,21 +53,20 @@ class Visualizer:
                    length=self.arris, height=self.arris, width=self.arris,
                    color=color.white)
         
-        self.cube.append(box1)
-        self.cube.append(box1_1)
-#        self.cube['4'] = [box4]
-#        self.cube['7'] = [box7]
+        self.cube[1] = [box1, box1_1]
+        self.cube[4] = [box4]
+        self.cube[7] = [box7]
     
     def rotate_X(self, figure):
         
         pass#figure
     
     def L_pluse(self):
-#        cube_list = [self.cube[1],
-#                     self.cube[4],
-#                     self.cube[7]
-#                     ]
-#        import pdb;pdb.set_trace()
+        cube_list = [self.cube[1],
+                     self.cube[4],
+                     self.cube[7]
+                     ]
+        import pdb;pdb.set_trace()
         #L_pluse_list = [cube_list[i][i] for i in cube_list]
 
 #        for i in range(self.range_rotate):
