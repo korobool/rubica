@@ -28,7 +28,6 @@ class Visualizer:
 
     #self.observer().notify('rotated', sender = self, args = (previous_state, direction))
     def notify(self, notification, sender = None, args = None):
-        print 'msg:', sender, args
         if notification == 'created':
             self.init_drawing(sender) # Init drawing window and subsystem
         if notification == 'rotated':
@@ -42,6 +41,7 @@ class Visualizer:
     def init_drawing(self, model):
         color_height = 0.01
         color_wide = 0.9
+        
         box1 = box(pos=(-1-self.d,1+self.d,1+self.d),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=color.white)
@@ -54,32 +54,48 @@ class Visualizer:
         box7 = box(pos=(-1-self.d,-1-self.d,1+self.d),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=color.white)
+        box10 = box(pos=(-1-self.d,1+self.d,0),
+                   length=self.arris, height=self.arris, width=self.arris,
+                   color=color.white)
+        box13 = box(pos=(-1-self.d,0,0),
+                   length=self.arris, height=self.arris, width=self.arris,
+                   color=color.white)
+        box16 = box(pos=(-1-self.d,-1-self.d,0),
+                   length=self.arris, height=self.arris, width=self.arris,
+                   color=color.white)
+        box19 = box(pos=(-1-self.d,1+self.d,-1-self.d),
+                   length=self.arris, height=self.arris, width=self.arris,
+                   color=color.white)
+        box22 = box(pos=(-1-self.d,0,-1-self.d),
+                   length=self.arris, height=self.arris, width=self.arris,
+                   color=color.white)
+        box25 = box(pos=(-1-self.d,-1-self.d,-1-self.d),
+                   length=self.arris, height=self.arris, width=self.arris,
+                   color=color.white)
         
         self.cube[1] = [box1, box1_1]
         self.cube[4] = [box4]
         self.cube[7] = [box7]
+        self.cube[10] = [box10]
+        self.cube[13] = [box13]
+        self.cube[16] = [box16]
+        self.cube[19] = [box19]
+        self.cube[22] = [box22]
+        self.cube[25] = [box25]
     
     def rotate_X(self, figure):
-        
-        pass#figure
+        figure.rotate(angle=-pi/(self.range_rotate*2), axis=vector((1,0,0)),
+            origin=(0,0,0))
     
     def L_pluse(self):
-        cube_list = [self.cube[1],
-                     self.cube[4],
-                     self.cube[7]
-                     ]
-#        import pdb;pdb.set_trace()
-        #L_pluse_list = [cube_list[i][i] for i in cube_list]
-
-#        for i in range(self.range_rotate):
-#            rate(self.speed_rotate)
-#            box1.rotate(angle=-pi/(self.range_rotate*2), axis=vector((1,0,0)),
-#                        origin=(0,0,0))
-#            box1_1.rotate(angle=-pi/(self.range_rotate*2), axis=vector((1,0,0)),
-#                          origin=(0,0,0))
-#        
-#        for elements in 
-        pass
+        cube_list = [self.cube[1], self.cube[4], self.cube[7],
+                     self.cube[10],self.cube[13],self.cube[16],
+                     self.cube[19],self.cube[22],self.cube[25],]
+        L_pluse_list = [j for i in cube_list for j in i]
+        for i in range(self.range_rotate):
+            rate(self.speed_rotate)
+            for j in L_pluse_list:
+                self.rotate_X(j)
     
 class Box:
     def __init__(self, id, box):
