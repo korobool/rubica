@@ -19,7 +19,7 @@ class Visualizer:
         scene.center = (0, 0, 0)
         scene.forward = (-1, -1, -1)
         scene.scale = (0.2,0.2,0.2)
-        self.cube = []
+        self.cube = {}
         
     def axes(self):
         x = arrow(pos=(0,0,0), axis=(5,0,0), shaftwidth=0.1)
@@ -28,17 +28,18 @@ class Visualizer:
 
     #self.observer().notify('rotated', sender = self, args = (previous_state, direction))
     def notify(self, notification, sender = None, args = None):
+        print 'msg:', sender, args
         if notification == 'created':
             self.init_drawing(sender) # Init drawing window and subsystem
         if notification == 'rotated':
             self.animate(args)
 
     def animate(self, args):
-        if args[2] == 'L+':
+        if args[1] == 'L+':
             self.L_pluse()
         pass
 
-    def init_drawing(self, args):
+    def init_drawing(self, model):
         color_height = 0.01
         color_wide = 0.9
         box1 = box(pos=(-1-self.d,1+self.d,1+self.d),
@@ -67,7 +68,7 @@ class Visualizer:
                      self.cube[4],
                      self.cube[7]
                      ]
-        import pdb;pdb.set_trace()
+#        import pdb;pdb.set_trace()
         #L_pluse_list = [cube_list[i][i] for i in cube_list]
 
 #        for i in range(self.range_rotate):
