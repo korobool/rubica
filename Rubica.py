@@ -14,7 +14,8 @@ class Cube():
         self.directions = ('L+', 'L-', 'R+', 'R-', 'U+', 'U-', 'D+', 'D-', 'B+', 'B-', 'F+', 'F-')
 
         if not self.observer() is None:
-            self.observer().notify('created', self)
+            # self.observer().notify('created', self)
+            self.observer().notify('created', sender = self)
 
         self.previous_state = self.copy()
 
@@ -113,7 +114,7 @@ class Cube():
             self.rotate('F+')
 
         if not self.observer() is None:
-            self.observer().notify('rotated', (previous_state, self, direction))
+            self.observer().notify('rotated', sender = self, args = (previous_state, direction))
 
         self.previous_state = previous_state
 
