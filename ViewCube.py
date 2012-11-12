@@ -20,7 +20,8 @@ class Visualizer:
         scene.forward = (-1, -1, -1)
         scene.scale = (0.2,0.2,0.2)
         self.cube = {}
-        
+        self.model = None
+
     def axes(self):
         x = arrow(pos=(0,0,0), axis=(3,0,0), shaftwidth=0.1)
         y = arrow(pos=(0,0,0), axis=(0,0,3), shaftwidth=0.1)
@@ -28,6 +29,13 @@ class Visualizer:
 
     #self.observer().notify('rotated', sender = self, args = (previous_state, direction))
     def notify(self, notification, sender = None, args = None):
+        if self.model is None and not sender is None:
+            self.model = sender
+        else:
+            if self.model != sender:
+                print 'Visualization is already bound to another cube instance', self.model
+                return
+
         if notification == 'created':
             self.init_drawing(sender) # Init drawing window and subsystem
         if notification == 'rotated':

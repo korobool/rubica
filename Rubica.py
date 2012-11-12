@@ -18,7 +18,7 @@ class Cube():
 
         self.previous_state = self.copy()
 
-    def rotate(self, direction):
+    def rotate(self, direction, is_recursive_call = False):
         previous_state = self.copy()
 
         if not direction in self.directions:
@@ -44,9 +44,9 @@ class Cube():
             self.fringe['top'][2][0] = cache[2]
 
         if direction == 'L-':
-            self.rotate('L+')
-            self.rotate('L+')
-            self.rotate('L+')
+            self.rotate('L+', True)
+            self.rotate('L+', True)
+            self.rotate('L+', True)
 
         if direction == 'R+':
             cache = [self.fringe['front'][0][2], self.fringe['front'][1][2], self.fringe['front'][2][2]]
@@ -67,9 +67,9 @@ class Cube():
             self.fringe['top'][2][2] = cache[2]
 
         if direction == 'R-':
-            self.rotate('R+')
-            self.rotate('R+')
-            self.rotate('R+')
+            self.rotate('R+', True)
+            self.rotate('R+', True)
+            self.rotate('R+', True)
 
         if direction == 'U+':
             cache = self.fringe['left'][0]
@@ -79,9 +79,9 @@ class Cube():
             self.fringe['front'][0] = cache
 
         if direction == 'U-':
-            self.rotate('U+')
-            self.rotate('U+')
-            self.rotate('U+')
+            self.rotate('U+', True)
+            self.rotate('U+', True)
+            self.rotate('U+', True)
 
         if direction == 'D+':
             cache = self.fringe['left'][2]
@@ -91,27 +91,27 @@ class Cube():
             self.fringe['front'][2] = cache
 
         if direction == 'D-':
-            self.rotate('D+')
-            self.rotate('D+')
-            self.rotate('D+')
+            self.rotate('D+', True)
+            self.rotate('D+', True)
+            self.rotate('D+', True)
 
         if direction == 'B+':
             pass
 
         if direction == 'B-':
-            self.rotate('B+')
-            self.rotate('B+')
-            self.rotate('B+')
+            self.rotate('B+', True)
+            self.rotate('B+', True)
+            self.rotate('B+', True)
 
         if direction == 'F+':
             pass
 
         if direction == 'F-':
-            self.rotate('F+')
-            self.rotate('F+')
-            self.rotate('F+')
+            self.rotate('F+', True)
+            self.rotate('F+', True)
+            self.rotate('F+', True)
 
-        if not Cube.__global_visualizer is None:
+        if not is_recursive_call and not Cube.__global_visualizer is None:
             Cube.__global_visualizer.notify('rotated', sender = self, args = (previous_state, direction))
 
         self.previous_state = previous_state
