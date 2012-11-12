@@ -11,9 +11,9 @@ from visual import *
 class Visualizer:
     
     def __init__(self):
-        self.speed_rotate = 100
+        self.speed_rotate = 150
         self.range_rotate = 50
-        self.axes()
+        # self.axes()
         self.d = 0.05 # delta between boxes
         self.arris = 1
         scene.center = (0, 0, 0)
@@ -240,7 +240,7 @@ class Visualizer:
         box23 = box(pos=(0,0,-1-self.d),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=color.white)
-        box23_3 = box(pos=(box23.pos[0],box23.pos[1],box23.pos[2]-(self.arris/2.0)),
+        box23_1 = box(pos=(box23.pos[0],box23.pos[1],box23.pos[2]-(self.arris/2.0)),
                      length=color_wide, height=color_wide, width=color_height,
                      color=color.blue)
         box24 = box(pos=(1+self.d,0,-1-self.d),
@@ -287,14 +287,32 @@ class Visualizer:
                      color=color.blue)
         
         self.cube[1] = [box1, box1_1, box1_2, box1_3]
+        self.cube[2] = [box2, box2_1, box2_2]
+        self.cube[3] = [box3, box3_1, box3_2, box3_3]
         self.cube[4] = [box4, box4_1, box4_2]
+        self.cube[5] = [box5, box5_1]
+        self.cube[6] = [box6, box6_1, box6_2]
         self.cube[7] = [box7, box7_1, box7_2, box7_3]
+        self.cube[8] = [box8, box8_1, box8_2]
+        self.cube[9] = [box9, box9_1, box9_2, box9_3]
         self.cube[10] = [box10, box10_1, box10_2]
+        self.cube[11] = [box1, box11_1]
+        self.cube[12] = [box12, box12_1, box12_2]
         self.cube[13] = [box13, box13_1]
+        self.cube[14] = [box14]
+        self.cube[15] = [box15, box15_1]
         self.cube[16] = [box16, box16_1, box16_2]
+        self.cube[17] = [box17, box17_1]
+        self.cube[18] = [box18, box18_1, box18_2]
         self.cube[19] = [box19, box19_1, box19_2, box19_3]
+        self.cube[20] = [box20, box20_1, box20_2]
+        self.cube[21] = [box21, box21_1, box21_2, box21_3]
         self.cube[22] = [box22, box22_1, box22_2]
+        self.cube[23] = [box23, box23_1]
+        self.cube[24] = [box24, box24_1, box24_2]
         self.cube[25] = [box25, box25_1, box25_2, box25_3]
+        self.cube[26] = [box26, box26_1, box26_2]
+        self.cube[27] = [box27, box27_1, box27_2, box27_3]
     
     def rotate_X(self, figure):
         figure.rotate(angle=-pi/(self.range_rotate*2), axis=vector((1,0,0)),
@@ -304,11 +322,10 @@ class Visualizer:
         cube_list = [self.cube[1], self.cube[4], self.cube[7],
                      self.cube[10],self.cube[13],self.cube[16],
                      self.cube[19],self.cube[22],self.cube[25]]
-        print self.cube[1][0].pos
         L_pluse_list = [j for i in cube_list for j in i]
         for i in range(self.range_rotate):
             rate(self.speed_rotate)
-            for j in L_pluse_list:
-                self.rotate_X(j)
-        # TODO: set new indexes for boxes
-                
+            for cube in L_pluse_list:
+                self.rotate_X(cube)
+        # TODO: set new indexes for boxes.
+        # import pdb;pdb.set_trace()
