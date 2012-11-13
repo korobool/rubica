@@ -11,7 +11,7 @@ from visual import *
 class Visualizer:
     
     def __init__(self):
-        self.speed_rotate = 150
+        self.speed_rotate = 200
         self.range_rotate = 50
         # self.axes()
         self.d = 0.05 # delta between boxes
@@ -43,9 +43,11 @@ class Visualizer:
 
     def animate(self, args):
         if args[1] == 'L+':
-            self.L_pluse()
-        pass
-
+            self.L_plus()
+        if args[1] == 'B+':
+            self.B_plus()
+        if args[1] == 'U+':
+            self.U_plus()
     def init_drawing(self, model):
         color_height = 0.01
         color_wide = 0.9
@@ -55,7 +57,7 @@ class Visualizer:
                    color=box_color)
         box1_1 = box(pos=(box1.pos[0]-(self.arris/2.0),box1.pos[1],box1.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.green)
+                     color=color.blue)
         box1_2 = box(pos=(box1.pos[0],box1.pos[1]+(self.arris/2.0),box1.pos[2]),
                      length=color_wide, height=color_height, width=color_wide,
                      color=color.yellow)
@@ -76,7 +78,7 @@ class Visualizer:
                    color=box_color)
         box3_1 = box(pos=(box3.pos[0]+(self.arris/2.0),box3.pos[1],box3.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.orange)
+                     color=color.green)
         box3_2 = box(pos=(box3.pos[0],box3.pos[1]+(self.arris/2.0),box3.pos[2]),
                      length=color_wide, height=color_height, width=color_wide,
                      color=color.yellow)
@@ -88,7 +90,7 @@ class Visualizer:
                    color=color.white)
         box4_1 = box(pos=(box4.pos[0]-(self.arris/2.0),box4.pos[1],box4.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.green)
+                     color=color.blue)
         box4_2 = box(pos=(box4.pos[0],box4.pos[1],box4.pos[2]+(self.arris/2.0)),
                      length=color_wide, height=color_wide, width=color_height,
                      color=color.red)
@@ -103,7 +105,7 @@ class Visualizer:
                    color=color.white)
         box6_1 = box(pos=(box6.pos[0]+(self.arris/2.0),box6.pos[1],box6.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.orange)
+                     color=color.green)
         box6_2 = box(pos=(box6.pos[0],box6.pos[1],box6.pos[2]+(self.arris/2.0)),
                      length=color_wide, height=color_wide, width=color_height,
                      color=color.red)
@@ -112,7 +114,7 @@ class Visualizer:
                    color=color.white)
         box7_1 = box(pos=(box7.pos[0]-(self.arris/2.0),box7.pos[1],box7.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.green)
+                     color=color.blue)
         box7_2 = box(pos=(box7.pos[0],box7.pos[1]-(self.arris/2.0),box7.pos[2]),
                      length=color_wide, height=color_height, width=color_wide,
                      color=color.white)
@@ -133,7 +135,7 @@ class Visualizer:
                    color=color.white)
         box9_1 = box(pos=(box9.pos[0]+(self.arris/2.0),box9.pos[1],box9.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.orange)
+                     color=color.green)
         box9_2 = box(pos=(box9.pos[0],box9.pos[1]-(self.arris/2.0),box9.pos[2]),
                      length=color_wide, height=color_height, width=color_wide,
                      color=color.white)
@@ -145,7 +147,7 @@ class Visualizer:
                    color=color.white)
         box10_1 = box(pos=(box10.pos[0]-(self.arris/2.0),box10.pos[1],box10.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.green)
+                     color=color.blue)
         box10_2 = box(pos=(box10.pos[0],box10.pos[1]+(self.arris/2.0),box10.pos[2]),
                      length=color_wide, height=color_height, width=color_wide,
                      color=color.yellow)
@@ -160,7 +162,7 @@ class Visualizer:
                    color=color.white)
         box12_1 = box(pos=(box12.pos[0]+(self.arris/2.0),box12.pos[1],box12.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.orange)
+                     color=color.green)
         box12_2 = box(pos=(box12.pos[0],box12.pos[1]+(self.arris/2.0),box12.pos[2]),
                      length=color_wide, height=color_height, width=color_wide,
                      color=color.yellow)
@@ -169,7 +171,7 @@ class Visualizer:
                    color=color.white)
         box13_1 = box(pos=(box13.pos[0]-(self.arris/2.0),box13.pos[1],box13.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.green)
+                     color=color.blue)
         box14 = box(pos=(0,0,0),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=box_color)
@@ -178,13 +180,13 @@ class Visualizer:
                    color=color.white)
         box15_1 = box(pos=(box15.pos[0]+(self.arris/2.0),box15.pos[1],box15.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.orange)
+                     color=color.green)
         box16 = box(pos=(-1-self.d,-1-self.d,0),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=color.white)
         box16_1 = box(pos=(box16.pos[0]-(self.arris/2.0),box16.pos[1],box16.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.green)
+                     color=color.blue)
         box16_2 = box(pos=(box16.pos[0],box16.pos[1]-(self.arris/2.0),box16.pos[2]),
                      length=color_wide, height=color_height, width=color_wide,
                      color=color.white)
@@ -199,7 +201,7 @@ class Visualizer:
                    color=color.white)
         box18_1 = box(pos=(box18.pos[0]+(self.arris/2.0),box18.pos[1],box18.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.orange)
+                     color=color.green)
         box18_2 = box(pos=(box18.pos[0],box18.pos[1]-(self.arris/2.0),box18.pos[2]),
                      length=color_wide, height=color_height, width=color_wide,
                      color=color.white)
@@ -208,13 +210,13 @@ class Visualizer:
                    color=color.white)
         box19_1 = box(pos=(box19.pos[0]-(self.arris/2.0),box19.pos[1],box19.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.green)
+                     color=color.blue)
         box19_2 = box(pos=(box19.pos[0],box19.pos[1]+(self.arris/2.0),box19.pos[2]),
                      length=color_wide, height=color_height, width=color_wide,
                      color=color.yellow)
         box19_3 = box(pos=(box19.pos[0],box19.pos[1],box19.pos[2]-(self.arris/2.0)),
                      length=color_wide, height=color_wide, width=color_height,
-                     color=color.blue)
+                     color=color.orange)
         box20 = box(pos=(0,1+self.d,-1-self.d),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=color.white)
@@ -223,55 +225,55 @@ class Visualizer:
                      color=color.yellow)
         box20_2 = box(pos=(box20.pos[0],box20.pos[1],box20.pos[2]-(self.arris/2.0)),
                      length=color_wide, height=color_wide, width=color_height,
-                     color=color.blue)
+                     color=color.orange)
         box21 = box(pos=(1+self.d,1+self.d,-1-self.d),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=color.white)
         box21_1 = box(pos=(box21.pos[0]+(self.arris/2.0),box21.pos[1],box21.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.orange)
+                     color=color.green)
         box21_2 = box(pos=(box21.pos[0],box21.pos[1]+(self.arris/2.0),box21.pos[2]),
                      length=color_wide, height=color_height, width=color_wide,
                      color=color.yellow)
         box21_3 = box(pos=(box21.pos[0],box21.pos[1],box21.pos[2]-(self.arris/2.0)),
                      length=color_wide, height=color_wide, width=color_height,
-                     color=color.blue)
+                     color=color.orange)
         box22 = box(pos=(-1-self.d,0,-1-self.d),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=color.white)
         box22_1 = box(pos=(box22.pos[0]-(self.arris/2.0),box22.pos[1],box22.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.green)
+                     color=color.blue)
         box22_2 = box(pos=(box22.pos[0],box22.pos[1],box22.pos[2]-(self.arris/2.0)),
                      length=color_wide, height=color_wide, width=color_height,
-                     color=color.blue)
+                     color=color.orange)
         box23 = box(pos=(0,0,-1-self.d),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=color.white)
         box23_1 = box(pos=(box23.pos[0],box23.pos[1],box23.pos[2]-(self.arris/2.0)),
                      length=color_wide, height=color_wide, width=color_height,
-                     color=color.blue)
+                     color=color.orange)
         box24 = box(pos=(1+self.d,0,-1-self.d),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=color.white)
         box24_1 = box(pos=(box24.pos[0]+(self.arris/2.0),box24.pos[1],box24.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.orange)
+                     color=color.green)
         box24_2 = box(pos=(box24.pos[0],box24.pos[1],box24.pos[2]-(self.arris/2.0)),
                      length=color_wide, height=color_wide, width=color_height,
-                     color=color.blue)
+                     color=color.orange)
         box25 = box(pos=(-1-self.d,-1-self.d,-1-self.d),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=color.white)
         box25_1 = box(pos=(box25.pos[0]-(self.arris/2.0),box25.pos[1],box25.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.green)
+                     color=color.blue)
         box25_2 = box(pos=(box25.pos[0],box25.pos[1]-(self.arris/2.0),box25.pos[2]),
                      length=color_wide, height=color_height, width=color_wide,
                      color=color.white)
         box25_3 = box(pos=(box25.pos[0],box25.pos[1],box25.pos[2]-(self.arris/2.0)),
                      length=color_wide, height=color_wide, width=color_height,
-                     color=color.blue)
+                     color=color.orange)
         box26 = box(pos=(0,-1-self.d,-1-self.d),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=box_color)
@@ -280,19 +282,19 @@ class Visualizer:
                      color=color.white)
         box26_2 = box(pos=(box26.pos[0],box26.pos[1],box26.pos[2]-(self.arris/2.0)),
                      length=color_wide, height=color_wide, width=color_height,
-                     color=color.blue)
+                     color=color.orange)
         box27 = box(pos=(1+self.d,-1-self.d,-1-self.d),
                    length=self.arris, height=self.arris, width=self.arris,
                    color=box_color)
         box27_1 = box(pos=(box27.pos[0]+(self.arris/2.0),box27.pos[1],box27.pos[2]),
                      length=color_height, height=color_wide, width=color_wide,
-                     color=color.orange)
+                     color=color.green)
         box27_2 = box(pos=(box27.pos[0],box27.pos[1]-(self.arris/2.0),box27.pos[2]),
                      length=color_wide, height=color_height, width=color_wide,
                      color=color.white)
         box27_3 = box(pos=(box27.pos[0],box27.pos[1],box27.pos[2]-(self.arris/2.0)),
                      length=color_wide, height=color_wide, width=color_height,
-                     color=color.blue)
+                     color=color.orange)
         
         self.cube[1] = [box1, box1_1, box1_2, box1_3]
         self.cube[2] = [box2, box2_1, box2_2]
@@ -304,7 +306,7 @@ class Visualizer:
         self.cube[8] = [box8, box8_1, box8_2]
         self.cube[9] = [box9, box9_1, box9_2, box9_3]
         self.cube[10] = [box10, box10_1, box10_2]
-        self.cube[11] = [box1, box11_1]
+        self.cube[11] = [box11, box11_1]
         self.cube[12] = [box12, box12_1, box12_2]
         self.cube[13] = [box13, box13_1]
         self.cube[14] = [box14]
@@ -322,18 +324,65 @@ class Visualizer:
         self.cube[26] = [box26, box26_1, box26_2]
         self.cube[27] = [box27, box27_1, box27_2, box27_3]
     
-    def rotate_X(self, figure):
+    def rotate_X_plus(self, figure):
         figure.rotate(angle=-pi/(self.range_rotate*2), axis=vector((1,0,0)),
             origin=(0,0,0))
+    def rotate_Y_plus(self, figure):
+        figure.rotate(angle=-pi/(self.range_rotate*2), axis=vector((0,0,1)),
+            origin=(0,0,0))
+    def rotate_Z_plus(self, figure):
+        figure.rotate(angle=pi/(self.range_rotate*2), axis=vector((0,1,0)),
+            origin=(0,0,0))
+    def rotate_X_minus(self, figure):
+        figure.rotate(angle=pi/(self.range_rotate*2), axis=vector((1,0,0)),
+            origin=(0,0,0))
+    def rotate_Y_minus(self, figure):
+        figure.rotate(angle=pi/(self.range_rotate*2), axis=vector((0,0,1)),
+            origin=(0,0,0))
+    def rotate_Z_minus(self, figure):
+        figure.rotate(angle=-pi/(self.range_rotate*2), axis=vector((0,10,0)),
+            origin=(0,0,0))
     
-    def L_pluse(self):
-        cube_list = [self.cube[1], self.cube[4], self.cube[7],
-                     self.cube[10],self.cube[13],self.cube[16],
-                     self.cube[19],self.cube[22],self.cube[25]]
+    def L_plus(self):
+        side_list = [1, 4, 7, 10, 13, 16, 19, 22, 25]
+        cube_list = [self.cube[i] for i in side_list]
         L_pluse_list = [j for i in cube_list for j in i]
         for i in range(self.range_rotate):
             rate(self.speed_rotate)
             for cube in L_pluse_list:
-                self.rotate_X(cube)
-        # TODO: set new indexes for boxes.
-        # import pdb;pdb.set_trace()
+                self.rotate_X_plus(cube)
+        new_cube_list = {1:self.cube[7], 4:self.cube[16], 7:self.cube[25],
+                         10:self.cube[4], 13:self.cube[13], 16:self.cube[22],
+                         19:self.cube[1], 22:self.cube[10], 25:self.cube[19]}
+        for key in new_cube_list.keys():
+            self.cube[key]=new_cube_list[key]
+
+    def B_plus(self):
+        side_list = [19, 20, 21, 22, 23, 24, 25, 26, 27]
+        cube_list = [self.cube[i] for i in side_list]
+        B_pluse_list = [j for i in cube_list for j in i]
+        for i in range(self.range_rotate):
+            rate(self.speed_rotate)
+            for cube in B_pluse_list:
+                self.rotate_Y_plus(cube)
+        new_cube_list = {19:self.cube[25], 20:self.cube[22], 21:self.cube[19],
+                         22:self.cube[26], 23:self.cube[23], 24:self.cube[20],
+                         25:self.cube[27], 26:self.cube[24], 27:self.cube[21]}
+        for key in new_cube_list.keys():
+            self.cube[key]=new_cube_list[key]
+
+    def U_plus(self):
+        side_list = [1, 2, 3, 10, 11, 12, 19, 20, 21]
+        cube_list = [self.cube[i] for i in side_list]
+        U_pluse_list = [j for i in cube_list for j in i]
+        for i in range(self.range_rotate):
+            rate(self.speed_rotate)
+            for cube in U_pluse_list:
+                self.rotate_Z_plus(cube)
+        new_cube_list = {3:self.cube[1], 2:self.cube[10], 1:self.cube[19],
+                         12:self.cube[2], 11:self.cube[11], 10:self.cube[20],
+                         21:self.cube[3], 20:self.cube[12], 19:self.cube[21]}
+        for key in new_cube_list.keys():
+            self.cube[key]=new_cube_list[key]
+            
+    

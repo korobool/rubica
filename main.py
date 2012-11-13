@@ -20,7 +20,7 @@ cube.print_cube()
 print 'Diff distance:', cube.get_distance(old_cube)
 print 'equality:', cube.is_equal_to(old_cube)
 
-pdb.set_trace()
+#pdb.set_trace()
 #cube.is_equal_to()
 
 #goal_cube = Rubica.Cube()

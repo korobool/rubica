@@ -139,9 +139,9 @@ class Cube():
         self.fringe['top'] = Cube.__gen_fringe('Y')
         self.fringe['front'] = Cube.__gen_fringe('R')
         self.fringe['bottom'] = Cube.__gen_fringe('W')
-        self.fringe['back'] = Cube.__gen_fringe('B')
-        self.fringe['left'] = Cube.__gen_fringe('G')
-        self.fringe['right'] = Cube.__gen_fringe('O')
+        self.fringe['back'] = Cube.__gen_fringe('O')
+        self.fringe['left'] = Cube.__gen_fringe('B')
+        self.fringe['right'] = Cube.__gen_fringe('G')
 
     def print_cube(self):
 #        for f in self.fringe:
