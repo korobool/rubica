@@ -43,6 +43,18 @@ class Cube():
             self.fringe['top'][1][0] = cache[1]
             self.fringe['top'][2][0] = cache[2]
 
+            ########
+            cache = [self.fringe['left'][0][0], self.fringe['left'][0][1]]
+            self.fringe['left'][0][0] = self.fringe['left'][0][2]
+            self.fringe['left'][0][1] = self.fringe['left'][1][2]
+            self.fringe['left'][0][2] = self.fringe['left'][2][2]
+            self.fringe['left'][1][2] = self.fringe['left'][2][1]
+            self.fringe['left'][2][2] = self.fringe['left'][2][0]
+            self.fringe['left'][2][1] = self.fringe['left'][1][0]
+            self.fringe['left'][2][0] = cache[0]
+            self.fringe['left'][1][0] = cache[1]
+
+
         if direction == 'L-':
             self.rotate('L+', True)
             self.rotate('L+', True)
@@ -65,6 +77,16 @@ class Cube():
             self.fringe['top'][0][2] = cache[0]
             self.fringe['top'][1][2] = cache[1]
             self.fringe['top'][2][2] = cache[2]
+            ########
+            cache = [self.fringe['right'][0][0], self.fringe['right'][0][1]]
+            self.fringe['right'][0][0] = self.fringe['right'][2][0]
+            self.fringe['right'][0][1] = self.fringe['right'][1][0]
+            self.fringe['right'][2][0] = self.fringe['right'][2][2]
+            self.fringe['right'][1][0] = self.fringe['right'][2][1]
+            self.fringe['right'][2][2] = self.fringe['right'][0][2]
+            self.fringe['right'][2][1] = self.fringe['right'][1][2]
+            self.fringe['right'][0][2] = cache[0]
+            self.fringe['right'][1][2] = cache[1]
 
         if direction == 'R-':
             self.rotate('R+', True)
@@ -72,11 +94,33 @@ class Cube():
             self.rotate('R+', True)
 
         if direction == 'U+':
-            cache = self.fringe['left'][0]
-            self.fringe['left'][0] = self.fringe['back'][0]
-            self.fringe['back'][0] = self.fringe['right'][0]
-            self.fringe['right'][0] = self.fringe['front'][0]
-            self.fringe['front'][0] = cache
+            cache = [self.fringe['left'][0][0], self.fringe['left'][0][1], self.fringe['left'][0][2]]
+            self.fringe['left'][0][0] = self.fringe['back'][2][2]
+            self.fringe['left'][0][1] = self.fringe['back'][2][1]
+            self.fringe['left'][0][2] = self.fringe['back'][2][0]
+
+            self.fringe['back'][2][0] = self.fringe['right'][0][2]
+            self.fringe['back'][2][1] = self.fringe['right'][0][1]
+            self.fringe['back'][2][2] = self.fringe['right'][0][0]
+
+            self.fringe['right'][0][0] = self.fringe['front'][0][0]
+            self.fringe['right'][0][1] = self.fringe['front'][0][1]
+            self.fringe['right'][0][2] = self.fringe['front'][0][2]
+
+            self.fringe['front'][0][0] = cache[0]
+            self.fringe['front'][0][1] = cache[1]
+            self.fringe['front'][0][2] = cache[2]
+
+            ########
+            cache = [self.fringe['top'][0][0], self.fringe['top'][0][1]]
+            self.fringe['top'][0][0] = self.fringe['top'][0][2]
+            self.fringe['top'][0][1] = self.fringe['top'][1][2]
+            self.fringe['top'][0][2] = self.fringe['top'][2][2]
+            self.fringe['top'][1][2] = self.fringe['top'][2][1]
+            self.fringe['top'][2][2] = self.fringe['top'][2][0]
+            self.fringe['top'][2][1] = self.fringe['top'][1][0]
+            self.fringe['top'][2][0] = cache[0]
+            self.fringe['top'][1][0] = cache[1]
 
         if direction == 'U-':
             self.rotate('U+', True)
@@ -84,11 +128,33 @@ class Cube():
             self.rotate('U+', True)
 
         if direction == 'D+':
-            cache = self.fringe['left'][2]
-            self.fringe['left'][2] = self.fringe['back'][2]
-            self.fringe['back'][2] = self.fringe['right'][2]
-            self.fringe['right'][2] = self.fringe['front'][2]
-            self.fringe['front'][2] = cache
+            cache = [self.fringe['left'][2][0], self.fringe['left'][2][1], self.fringe['left'][2][2]]
+            self.fringe['left'][2][0] = self.fringe['back'][0][2]
+            self.fringe['left'][2][1] = self.fringe['back'][0][1]
+            self.fringe['left'][2][2] = self.fringe['back'][0][0]
+
+            self.fringe['back'][0][0] = self.fringe['right'][2][2]
+            self.fringe['back'][0][1] = self.fringe['right'][2][1]
+            self.fringe['back'][0][2] = self.fringe['right'][2][0]
+
+            self.fringe['right'][2][0] = self.fringe['front'][2][0]
+            self.fringe['right'][2][1] = self.fringe['front'][2][1]
+            self.fringe['right'][2][2] = self.fringe['front'][2][2]
+
+            self.fringe['front'][2][0] = cache[0]
+            self.fringe['front'][2][1] = cache[1]
+            self.fringe['front'][2][2] = cache[2]
+
+            ########
+            cache = [self.fringe['bottom'][0][0], self.fringe['bottom'][0][1]]
+            self.fringe['bottom'][0][0] = self.fringe['bottom'][2][0]
+            self.fringe['bottom'][0][1] = self.fringe['bottom'][1][0]
+            self.fringe['bottom'][2][0] = self.fringe['bottom'][2][2]
+            self.fringe['bottom'][1][0] = self.fringe['bottom'][2][1]
+            self.fringe['bottom'][2][2] = self.fringe['bottom'][0][2]
+            self.fringe['bottom'][2][1] = self.fringe['bottom'][1][2]
+            self.fringe['bottom'][0][2] = cache[0]
+            self.fringe['bottom'][1][2] = cache[1]
 
         if direction == 'D-':
             self.rotate('D+', True)
@@ -96,7 +162,33 @@ class Cube():
             self.rotate('D+', True)
 
         if direction == 'B+':
-            pass
+            cache = [self.fringe['top'][0][0], self.fringe['top'][0][1], self.fringe['top'][0][2]]
+            self.fringe['top'][0][0] = self.fringe['left'][2][0]
+            self.fringe['top'][0][1] = self.fringe['left'][1][0]
+            self.fringe['top'][0][2] = self.fringe['left'][0][0]
+
+            self.fringe['left'][0][0] = self.fringe['bottom'][2][0]
+            self.fringe['left'][1][0] = self.fringe['bottom'][2][1]
+            self.fringe['left'][2][0] = self.fringe['bottom'][2][2]
+
+            self.fringe['bottom'][2][0] = self.fringe['right'][2][2]
+            self.fringe['bottom'][2][1] = self.fringe['right'][1][2]
+            self.fringe['bottom'][2][2] = self.fringe['right'][0][2]
+
+            self.fringe['right'][0][2] = cache[0]
+            self.fringe['right'][1][2] = cache[1]
+            self.fringe['right'][2][2] = cache[2]
+
+            ########
+            cache = [self.fringe['back'][0][0], self.fringe['back'][0][1]]
+            self.fringe['back'][0][0] = self.fringe['back'][0][2]
+            self.fringe['back'][0][1] = self.fringe['back'][1][2]
+            self.fringe['back'][0][2] = self.fringe['back'][2][2]
+            self.fringe['back'][1][2] = self.fringe['back'][2][1]
+            self.fringe['back'][2][2] = self.fringe['back'][2][0]
+            self.fringe['back'][2][1] = self.fringe['back'][1][0]
+            self.fringe['back'][2][0] = cache[0]
+            self.fringe['back'][1][0] = cache[1]
 
         if direction == 'B-':
             self.rotate('B+', True)
@@ -104,12 +196,39 @@ class Cube():
             self.rotate('B+', True)
 
         if direction == 'F+':
-            pass
+            cache = [self.fringe['top'][2][0], self.fringe['top'][2][1], self.fringe['top'][2][2]]
+            self.fringe['top'][2][0] = self.fringe['left'][2][2]
+            self.fringe['top'][2][1] = self.fringe['left'][1][2]
+            self.fringe['top'][2][2] = self.fringe['left'][0][2]
+
+            self.fringe['left'][0][2] = self.fringe['bottom'][0][0]
+            self.fringe['left'][1][2] = self.fringe['bottom'][0][1]
+            self.fringe['left'][2][2] = self.fringe['bottom'][0][2]
+
+            self.fringe['bottom'][0][0] = self.fringe['right'][2][0]
+            self.fringe['bottom'][0][1] = self.fringe['right'][1][0]
+            self.fringe['bottom'][0][2] = self.fringe['right'][0][0]
+
+            self.fringe['right'][0][0] = cache[0]
+            self.fringe['right'][1][0] = cache[1]
+            self.fringe['right'][2][0] = cache[2]
+
+            ########
+            cache = [self.fringe['front'][0][0], self.fringe['front'][0][1]]
+            self.fringe['front'][0][0] = self.fringe['front'][2][0]
+            self.fringe['front'][0][1] = self.fringe['front'][1][0]
+            self.fringe['front'][2][0] = self.fringe['front'][2][2]
+            self.fringe['front'][1][0] = self.fringe['front'][2][1]
+            self.fringe['front'][2][2] = self.fringe['front'][0][2]
+            self.fringe['front'][2][1] = self.fringe['front'][1][2]
+            self.fringe['front'][0][2] = cache[0]
+            self.fringe['front'][1][2] = cache[1]
 
         if direction == 'F-':
             self.rotate('F+', True)
             self.rotate('F+', True)
             self.rotate('F+', True)
+
 
         if not is_recursive_call and not Cube.__global_visualizer is None:
             Cube.__global_visualizer.notify('rotated', sender = self, args = (previous_state, direction))
@@ -144,9 +263,7 @@ class Cube():
         self.fringe['right'] = Cube.__gen_fringe('G')
 
     def print_cube(self):
-#        for f in self.fringe:
-#            print f, ':\n', self.fringe[f][0], '\n', self.fringe[f][1], '\n', self.fringe[f][2]
-        print '_______________________________________________'
+        print '________________________________________________________'
         Cube.print_3(Cube.__gen_fringe(' '), self.fringe['top'], Cube.__gen_fringe(' '))
         Cube.print_3(self.fringe['left'], self.fringe['front'], self.fringe['right'])
         Cube.print_3(Cube.__gen_fringe(' '), self.fringe['bottom'], Cube.__gen_fringe(' '))
@@ -155,9 +272,14 @@ class Cube():
 
     @classmethod
     def __gen_fringe(cls, color):
-        return [[color, color, color],\
-                [color, color, color],\
-                [color, color, color]]
+        if color != ' ':
+            return  [[color + '1', color + '2', color + '3'],\
+                    [color + '4', color + '5', color + '6'],\
+                    [color + '7', color + '8', color + '9']]
+        else:
+            return [['  ', '  ', '  '],\
+                    ['  ', '  ', '  '],\
+                    ['  ', '  ', '  ']]
 
     def solve(self):
         pass
