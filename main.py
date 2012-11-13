@@ -13,7 +13,7 @@ cube = Rubica.Cube(ViewCube.Visualizer())
 
 old_cube = cube.copy()
 
-cube.rotate('L+')
+cube.rotate('U+')
 
 old_cube.print_cube()
 cube.print_cube()

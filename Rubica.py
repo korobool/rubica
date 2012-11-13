@@ -29,15 +29,15 @@ class Cube():
             cache = [self.fringe['front'][0][0], self.fringe['front'][1][0], self.fringe['front'][2][0]]
             self.fringe['front'][0][0] = self.fringe['bottom'][0][0]
             self.fringe['front'][1][0] = self.fringe['bottom'][1][0]
-            self.fringe['front'][2][0] = self.fringe['bottom'][1][0]
+            self.fringe['front'][2][0] = self.fringe['bottom'][2][0]
 
             self.fringe['bottom'][0][0] = self.fringe['back'][0][0]
             self.fringe['bottom'][1][0] = self.fringe['back'][1][0]
-            self.fringe['bottom'][2][0] = self.fringe['back'][1][0]
+            self.fringe['bottom'][2][0] = self.fringe['back'][2][0]
 
             self.fringe['back'][0][0] = self.fringe['top'][0][0]
             self.fringe['back'][1][0] = self.fringe['top'][1][0]
-            self.fringe['back'][2][0] = self.fringe['top'][1][0]
+            self.fringe['back'][2][0] = self.fringe['top'][2][0]
 
             self.fringe['top'][0][0] = cache[0]
             self.fringe['top'][1][0] = cache[1]
@@ -255,12 +255,12 @@ class Cube():
 
 
     def __init__fringes(self):
-        self.fringe['top'] = Cube.__gen_fringe('0')
-        self.fringe['front'] = Cube.__gen_fringe('1')
-        self.fringe['bottom'] = Cube.__gen_fringe('2')
-        self.fringe['back'] = Cube.__gen_fringe('3')
-        self.fringe['left'] = Cube.__gen_fringe('4')
-        self.fringe['right'] = Cube.__gen_fringe('5')
+        self.fringe['top'] = Cube.__gen_fringe('T')
+        self.fringe['front'] = Cube.__gen_fringe('F')
+        self.fringe['bottom'] = Cube.__gen_fringe('b')
+        self.fringe['back'] = Cube.__gen_fringe('B')
+        self.fringe['left'] = Cube.__gen_fringe('L')
+        self.fringe['right'] = Cube.__gen_fringe('R')
 
     def print_cube(self):
         print '________________________________________________________'
