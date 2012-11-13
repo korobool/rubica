@@ -1,44 +1,19 @@
 import pdb
 
-__author__ = 'oleksandr'
+__author__ = 'Oleksandr Korobov'
 
 # This file is just script for development and testing purposes for Rubica.Cube class
 
 import Rubica
 import ViewCube
+from Solver import solve_cube
 
 cube = Rubica.Cube(ViewCube.Visualizer())
-
-#cube.print_cube()
 
 old_cube = cube.copy()
 
 cube.rotate('U+')
 
-old_cube.print_cube()
-cube.print_cube()
-
-#print 'Diff distance:', cube.get_distance(old_cube)
-#print 'equality:', cube.is_equal_to(old_cube)
+solve_cube(cube)
 
 pdb.set_trace()
-#cube.is_equal_to()
-
-#goal_cube = Rubica.Cube()
-
-#old = cube.copy()
-#cube.rotate('L+')
-#print 'are equal:', cube.is_equal_to(old)
-#print 'distance:', cube.get_distance(old)
-#cube.randomize()
-#print 'distance:', cube.get_distance(old)
-#cube.print_cube()
-#cube.rotate('L-')
-#print 'are equal:', cube.is_equal_to(old)
-#print 'distance:', cube.get_distance(old)
-#
-#old.print_cube()
-#cube.print_cube()
-
-
-#cube.solve()
