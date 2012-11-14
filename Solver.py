@@ -8,6 +8,8 @@ def solve_cube(cube, goal = Cube()):
 
     print 'Not implemented yet. This is just a stub.'
     cube.rotate('U+')
-
+    cache = cube.copy()
+    directions = cube.directions
+    print directions
     #goal.print_cube()
     print ''
