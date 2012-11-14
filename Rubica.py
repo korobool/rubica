@@ -19,6 +19,11 @@ class Cube():
 
         self.previous_state = self.copy()
 
+        self.h = -1
+        self.g = -1
+        self.f = -1
+        self.parent_direction = None
+
     def rotate(self, direction, is_recursive_call = False):
         previous_state = self.copy()
 
