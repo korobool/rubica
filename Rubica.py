@@ -7,6 +7,7 @@ import weakref
 
 class Cube():
     __global_visualizer = None
+
     def __init__(self, observer = None):
         self.fringe = {}
         self.__init__fringes()
