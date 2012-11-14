@@ -11,8 +11,9 @@ from Solver import solve_cube
 cube = Rubica.Cube(ViewCube.Visualizer())
 
 old_cube = cube.copy()
-
+cube.print_cube()
 cube.rotate('U+')
+cube.print_cube()
 
 solve_cube(cube)
 

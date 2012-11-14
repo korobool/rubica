@@ -4,40 +4,10 @@ __author__ = 'Oleksandr Korobov'
 
 from Rubica import Cube
 
-def solve_cube(state, goal_state = Cube()):
+def solve_cube(cube, goal = Cube()):
 
     print 'Not implemented yet. This is just a stub.'
+    cube.rotate('U+')
 
-    state.rotate('L+')
-    state.rotate('U+')
-    state.rotate('B+')
-    state.rotate('L+')
-    state.rotate('U+')
-    state.rotate('L+')
-    state.rotate('U+')
-    state.rotate('B+')
-    state.rotate('L+')
-    state.rotate('U+')
-    state.rotate('L+')
-    state.rotate('U+')
-    state.rotate('B+')
-    state.rotate('L+')
-    state.rotate('U+')
-    state.rotate('L+')
-    state.rotate('U+')
-    state.rotate('B+')
-    state.rotate('L+')
-    state.rotate('U+')
-    state.rotate('L+')
-    state.rotate('U+')
-    state.rotate('B+')
-    state.rotate('L+')
-    state.rotate('U+')
-    state.rotate('L+')
-    state.rotate('U+')
-    state.rotate('B+')
-    state.rotate('L+')
-    state.rotate('U+')
-
-    goal_state.print_cube()
+    #goal.print_cube()
     print ''
