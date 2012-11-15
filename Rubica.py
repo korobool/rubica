@@ -70,15 +70,15 @@ class Cube():
             cache = [self.fringe['front'][0][2], self.fringe['front'][1][2], self.fringe['front'][2][2]]
             self.fringe['front'][0][2] = self.fringe['bottom'][0][2]
             self.fringe['front'][1][2] = self.fringe['bottom'][1][2]
-            self.fringe['front'][2][2] = self.fringe['bottom'][1][2]
+            self.fringe['front'][2][2] = self.fringe['bottom'][2][2]
 
             self.fringe['bottom'][0][2] = self.fringe['back'][0][2]
             self.fringe['bottom'][1][2] = self.fringe['back'][1][2]
-            self.fringe['bottom'][2][2] = self.fringe['back'][1][2]
+            self.fringe['bottom'][2][2] = self.fringe['back'][2][2]
 
             self.fringe['back'][0][2] = self.fringe['top'][0][2]
             self.fringe['back'][1][2] = self.fringe['top'][1][2]
-            self.fringe['back'][2][2] = self.fringe['top'][1][2]
+            self.fringe['back'][2][2] = self.fringe['top'][2][2]
 
             self.fringe['top'][0][2] = cache[0]
             self.fringe['top'][1][2] = cache[1]

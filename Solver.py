@@ -1,3 +1,5 @@
+import pdb
+
 __author__ = 'Oleksandr Korobov'
 
 # This file contains rubica cube solver logic based on A*
@@ -61,45 +63,57 @@ def solve_cube(cube, goal = Cube()):
 
     path_found = False
 
+    finish = None
+
     while not path_found:
-        print len(open_list), len(close_list)
+        #print len(open_list), len(close_list)
         current_state = cursor.copy()
+
+
         for direction in cursor.directions:
             current_state.rotate(direction)
 
+            current_state.parent_direction = opposite_direction(direction)
+
             if current_state.is_equal_to(goal):
                 path_found = True
-
-            current_state.parent_direction = opposite_direction(direction)
+                finish = current_state.copy()
 
             current_state.h = current_state.get_distance(goal)
             current_state.g = cursor.g + 1
+            current_state.f = current_state.g + current_state.h
+
+            #current_state.print_cube()
 
             if not is_in_close_list(current_state):
                 form_open_list = get_equal_from_open_list(current_state)
                 if form_open_list is None:
                     open_list.append(current_state.copy())
+                    # print current_state.parent_direction
                 else:
+                    print 'open'
                     if form_open_list.g > current_state.g:
                         form_open_list.g = current_state.g
                         current_state.parent_direction = current_state.parent_direction
+#                    d = current_state.parent_direction
                 current_state = cursor.copy()
 
+
+#            if cursor.g == 3:
+#                return
         move_to_close_list(cursor)
         cursor = get_cheapest_from_open_list()
+        print cursor.f, cursor.g, cursor.h
 
     path = []
 
-
-
-    while not cursor.parent_direction is None:
-        path.append(cursor.parent_direction)
+    while not finish.is_equal_to(cube): #cursor.parent_direction is None:
+        path.append(finish.parent_direction)
 #        cursor = get_equal_from_open_list(cursor.rotate(cursor.parent_direction))
 #        if cursor is None:
-        cursor.rotate(cursor.parent_direction)
-        cursor.print_cube()
-        cursor = get_equal_from_close_list(cursor)
-
+        finish.rotate(finish.parent_direction)
+        #cursor.print_cube()
+        finish = get_equal_from_close_list(finish)
 
     print path
 

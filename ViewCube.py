@@ -33,7 +33,6 @@ class Visualizer:
             self.model = sender
         else:
             if self.model != sender:
-                #print 'Visualization is already bound to another cube instance', self.model
                 return
 
         if notification == 'created':
