@@ -33,11 +33,11 @@ class Visualizer:
             self.model = sender
         else:
             if self.model != sender:
-                print 'Visualization is already bound to another cube instance', self.model
                 return
 
         if notification == 'created':
             print(sender.fringe)
+        if notification == 'bound_to_cube':
             self.init_drawing(sender) # Init drawing window and subsystem
         if notification == 'rotated':
             self.animate(args)

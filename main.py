@@ -8,13 +8,22 @@ import Rubica
 import ViewCube
 from Solver import solve_cube
 
-cube = Rubica.Cube(ViewCube.Visualizer())
+cube = Rubica.Cube()#ViewCube.Visualizer())
 
 old_cube = cube.copy()
-cube.print_cube()
-cube.rotate('U+')
+
+cube.randomize()
+
 cube.print_cube()
 
-solve_cube(cube)
+cube.bind_visualizer(ViewCube.Visualizer())
 
-pdb.set_trace()
+cube.print_cube()
+
+#print cube.is_equal_to(old_cube)
+
+#cube.randomize()
+
+#solve_cube(cube)
+
+# pdb.set_trace()
