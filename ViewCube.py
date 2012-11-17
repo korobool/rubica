@@ -37,6 +37,7 @@ class Visualizer:
                 return
 
         if notification == 'created':
+            print(sender.fringe)
             self.init_drawing(sender) # Init drawing window and subsystem
         if notification == 'rotated':
             self.animate(args)
