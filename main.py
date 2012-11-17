@@ -11,21 +11,19 @@ from Solver import solve_cube
 cube = Rubica.Cube()#ViewCube.Visualizer())
 
 old_cube = cube.copy()
-#cube.print_cube()
-#cube.rotate('U+')
-#cube.rotate('D+')
-#cube.rotate('D+')
-#cube.rotate('D+')
-cube.rotate('D+')
-cube.rotate('F+')
-cube.rotate('U-')
-#cube.rotate('F-')
-#cube.rotate('D-')
+
+cube.randomize()
+
 cube.print_cube()
+
+cube.bind_visualizer(ViewCube.Visualizer())
+
+cube.print_cube()
+
 #print cube.is_equal_to(old_cube)
 
 #cube.randomize()
 
-solve_cube(cube)
+#solve_cube(cube)
 
 # pdb.set_trace()

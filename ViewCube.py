@@ -35,7 +35,7 @@ class Visualizer:
             if self.model != sender:
                 return
 
-        if notification == 'created':
+        if notification == 'bound_to_cube':
             self.init_drawing(sender) # Init drawing window and subsystem
         if notification == 'rotated':
             self.animate(args)

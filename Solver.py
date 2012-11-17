@@ -79,7 +79,9 @@ def solve_cube(cube, goal = Cube()):
                 path_found = True
                 finish = current_state.copy()
 
-            current_state.h = current_state.get_distance(goal)
+            #current_state.h = current_state.get_distance(goal)
+            current_state.h = 0.5 * current_state.get_color_distance(goal)
+            #current_state.h = current_state.get_distance(goal) + current_state.get_color_distance(goal)
             current_state.g = cursor.g + 1
             current_state.f = current_state.g + current_state.h
 
@@ -91,7 +93,6 @@ def solve_cube(cube, goal = Cube()):
                     open_list.append(current_state.copy())
                     # print current_state.parent_direction
                 else:
-                    print 'open'
                     if form_open_list.g > current_state.g:
                         form_open_list.g = current_state.g
                         current_state.parent_direction = current_state.parent_direction
