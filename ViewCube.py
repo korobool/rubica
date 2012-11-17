@@ -7,6 +7,7 @@ __author__ = 'oleksandr'
 # class automaticaly)
 
 from visual import *
+from pprint import pprint
 
 class Visualizer:
     
@@ -21,6 +22,7 @@ class Visualizer:
         scene.scale = (0.2,0.2,0.2)
         self.cube = {}
         self.model = None
+        self.init_drawing() # Init drawing window and subsystem
 
     def axes(self):
         x = arrow(pos=(0,0,0), axis=(3,0,0), shaftwidth=0.1)
@@ -35,21 +37,32 @@ class Visualizer:
             if self.model != sender:
                 return
 
-        if notification == 'created':
-            print(sender.fringe)
+#        if notification == 'created':
+#            self.init_drawing(sender)
         if notification == 'bound_to_cube':
-            self.init_drawing(sender) # Init drawing window and subsystem
+            if self.cube != {}:
+                self.bound_to_cube(sender.fringe)
+            else:
+                print("Init drawing window and subsystem needed!")
         if notification == 'rotated':
             self.animate(args)
+            self.bound_to_cube(sender.fringe)
 
     def animate(self, args):
-        if args[1] == 'L+':
-            self.L_plus()
-        if args[1] == 'B+':
-            self.B_plus()
-        if args[1] == 'U+':
-            self.U_plus()
-    def init_drawing(self, model):
+        if args[1] == 'L+': self.L_plus()
+        if args[1] == 'R+': self.R_plus()
+        if args[1] == 'B+': self.B_plus()
+        if args[1] == 'F+': self.F_plus()
+        if args[1] == 'U+': self.U_plus()
+        if args[1] == 'D+': self.D_plus()
+        if args[1] == 'L-': self.L_minus()
+        if args[1] == 'R-': self.R_minus()
+        if args[1] == 'B-': self.B_minus()
+        if args[1] == 'F-': self.F_minus()
+        if args[1] == 'U-': self.U_minus()
+        if args[1] == 'D-': self.D_minus()
+            
+    def init_drawing(self):
         color_height = 0.01
         color_wide = 0.9
         box_color = color.white
@@ -325,6 +338,50 @@ class Visualizer:
         self.cube[26] = [box26, box26_1, box26_2]
         self.cube[27] = [box27, box27_1, box27_2, box27_3]
     
+    def bound_to_cube(self, cube):
+        # Set colors instead of strings
+        for key in cube.keys():
+            for i in range(3):
+                for j in range(3):
+                    if cube[key][i][j][0] == 'F':
+                        cube[key][i][j] = color.red
+                    if cube[key][i][j][0] == 'R':
+                        cube[key][i][j] = color.green
+                    if cube[key][i][j][0] == 'L':
+                        cube[key][i][j] = color.blue
+                    if cube[key][i][j][0] == 'T':
+                        cube[key][i][j] = color.yellow
+                    if cube[key][i][j][0] == 'b':
+                        cube[key][i][j] = color.white
+                    if cube[key][i][j][0] == 'B':
+                        cube[key][i][j] = color.orange
+        pprint(cube)
+        # Create self.cube dictionary
+        proxy_cube = {'back':[[self.cube[25][3],self.cube[26][2],self.cube[27][3]],
+                               [self.cube[22][2],self.cube[23][1],self.cube[24][2]],
+                               [self.cube[19][3],self.cube[20][2],self.cube[21][3]]],
+                      'bottom':[[self.cube[7][2],self.cube[8][1],self.cube[9][2]],
+                               [self.cube[16][2],self.cube[17][1],self.cube[18][2]],
+                               [self.cube[25][2],self.cube[26][1],self.cube[27][2]]],
+                      'front':[[self.cube[1][3],self.cube[2][2],self.cube[3][3]],
+                               [self.cube[4][2],self.cube[5][1],self.cube[6][2]],
+                               [self.cube[7][3],self.cube[8][2],self.cube[9][3]]],
+                      'left':[[self.cube[19][1],self.cube[10][1],self.cube[1][1]],
+                               [self.cube[22][1],self.cube[13][1],self.cube[4][1]],
+                               [self.cube[25][1],self.cube[16][1],self.cube[7][1]]],
+                      'right':[[self.cube[3][1],self.cube[12][1],self.cube[21][1]],
+                               [self.cube[6][1],self.cube[15][1],self.cube[24][1]],
+                               [self.cube[9][1],self.cube[18][1],self.cube[27][1]]],
+                      'top':[[self.cube[19][2],self.cube[20][1],self.cube[21][2]],
+                               [self.cube[10][2],self.cube[11][1],self.cube[12][2]],
+                               [self.cube[1][2],self.cube[2][1],self.cube[3][2]]]
+                      }
+        # Map cube color dict to proxy_cube colors
+        for key in proxy_cube.keys():
+            for i in range(3):
+                for j in range(3):
+                    proxy_cube[key][i][j].color = cube[key][i][j]
+    
     def rotate_X_plus(self, figure):
         figure.rotate(angle=-pi/(self.range_rotate*2), axis=vector((1,0,0)),
             origin=(0,0,0))
@@ -347,10 +404,10 @@ class Visualizer:
     def L_plus(self):
         side_list = [1, 4, 7, 10, 13, 16, 19, 22, 25]
         cube_list = [self.cube[i] for i in side_list]
-        L_pluse_list = [j for i in cube_list for j in i]
+        box_list = [j for i in cube_list for j in i]
         for i in range(self.range_rotate):
             rate(self.speed_rotate)
-            for cube in L_pluse_list:
+            for cube in box_list:
                 self.rotate_X_plus(cube)
         new_cube_list = {1:self.cube[7], 4:self.cube[16], 7:self.cube[25],
                          10:self.cube[4], 13:self.cube[13], 16:self.cube[22],
@@ -358,13 +415,27 @@ class Visualizer:
         for key in new_cube_list.keys():
             self.cube[key]=new_cube_list[key]
 
+    def R_plus(self):
+        side_list = [3, 6, 9, 12, 15, 18, 21, 24, 27]
+        cube_list = [self.cube[i] for i in side_list]
+        box_list = [j for i in cube_list for j in i]
+        for i in range(self.range_rotate):
+            rate(self.speed_rotate)
+            for cube in box_list:
+                self.rotate_X_plus(cube)
+        new_cube_list = {3:self.cube[9], 12:self.cube[6], 21:self.cube[3],
+                         6:self.cube[18], 15:self.cube[15], 24:self.cube[12],
+                         9:self.cube[27], 18:self.cube[24], 27:self.cube[21]}
+        for key in new_cube_list.keys():
+            self.cube[key]=new_cube_list[key]
+
     def B_plus(self):
         side_list = [19, 20, 21, 22, 23, 24, 25, 26, 27]
         cube_list = [self.cube[i] for i in side_list]
-        B_pluse_list = [j for i in cube_list for j in i]
+        box_list = [j for i in cube_list for j in i]
         for i in range(self.range_rotate):
             rate(self.speed_rotate)
-            for cube in B_pluse_list:
+            for cube in box_list:
                 self.rotate_Y_plus(cube)
         new_cube_list = {19:self.cube[25], 20:self.cube[22], 21:self.cube[19],
                          22:self.cube[26], 23:self.cube[23], 24:self.cube[20],
@@ -372,18 +443,129 @@ class Visualizer:
         for key in new_cube_list.keys():
             self.cube[key]=new_cube_list[key]
 
+    def F_plus(self):
+        side_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        cube_list = [self.cube[i] for i in side_list]
+        box_list = [j for i in cube_list for j in i]
+        for i in range(self.range_rotate):
+            rate(self.speed_rotate)
+            for cube in box_list:
+                self.rotate_Y_plus(cube)
+        new_cube_list = {1:self.cube[7], 2:self.cube[4], 3:self.cube[1],
+                         4:self.cube[8], 5:self.cube[5], 6:self.cube[2],
+                         7:self.cube[9], 8:self.cube[6], 9:self.cube[3]}
+        for key in new_cube_list.keys():
+            self.cube[key]=new_cube_list[key]
+
     def U_plus(self):
         side_list = [1, 2, 3, 10, 11, 12, 19, 20, 21]
         cube_list = [self.cube[i] for i in side_list]
-        U_pluse_list = [j for i in cube_list for j in i]
+        box_list = [j for i in cube_list for j in i]
         for i in range(self.range_rotate):
             rate(self.speed_rotate)
-            for cube in U_pluse_list:
+            for cube in box_list:
                 self.rotate_Z_plus(cube)
         new_cube_list = {3:self.cube[1], 2:self.cube[10], 1:self.cube[19],
                          12:self.cube[2], 11:self.cube[11], 10:self.cube[20],
                          21:self.cube[3], 20:self.cube[12], 19:self.cube[21]}
         for key in new_cube_list.keys():
             self.cube[key]=new_cube_list[key]
-            
     
+    def D_plus(self):
+        side_list = [7, 8, 9, 16, 17, 18, 25, 26, 27]
+        cube_list = [self.cube[i] for i in side_list]
+        box_list = [j for i in cube_list for j in i]
+        for i in range(self.range_rotate):
+            rate(self.speed_rotate)
+            for cube in box_list:
+                self.rotate_Z_plus(cube)
+        new_cube_list = {7:self.cube[25], 8:self.cube[16], 9:self.cube[7],
+                         16:self.cube[26], 17:self.cube[17], 18:self.cube[8],
+                         25:self.cube[27], 26:self.cube[18], 27:self.cube[9]}
+        for key in new_cube_list.keys():
+            self.cube[key]=new_cube_list[key]
+
+    def L_minus(self):
+        side_list = [1, 4, 7, 10, 13, 16, 19, 22, 25]
+        cube_list = [self.cube[i] for i in side_list]
+        box_list = [j for i in cube_list for j in i]
+        for i in range(self.range_rotate):
+            rate(self.speed_rotate)
+            for cube in box_list:
+                self.rotate_X_minus(cube)
+        new_cube_list = {1:self.cube[19], 4:self.cube[10], 7:self.cube[1],
+                         10:self.cube[22], 13:self.cube[13], 16:self.cube[4],
+                         19:self.cube[25], 22:self.cube[16], 25:self.cube[7]}
+        for key in new_cube_list.keys():
+            self.cube[key]=new_cube_list[key]
+
+    def R_minus(self):
+        side_list = [3, 6, 9, 12, 15, 18, 21, 24, 27]
+        cube_list = [self.cube[i] for i in side_list]
+        box_list = [j for i in cube_list for j in i]
+        for i in range(self.range_rotate):
+            rate(self.speed_rotate)
+            for cube in box_list:
+                self.rotate_X_minus(cube)
+        new_cube_list = {3:self.cube[21], 12:self.cube[24], 21:self.cube[27],
+                         6:self.cube[12], 15:self.cube[15], 24:self.cube[18],
+                         9:self.cube[3], 18:self.cube[6], 27:self.cube[9]}
+        for key in new_cube_list.keys():
+            self.cube[key]=new_cube_list[key]
+
+    def B_minus(self):
+        side_list = [19, 20, 21, 22, 23, 24, 25, 26, 27]
+        cube_list = [self.cube[i] for i in side_list]
+        box_list = [j for i in cube_list for j in i]
+        for i in range(self.range_rotate):
+            rate(self.speed_rotate)
+            for cube in box_list:
+                self.rotate_Y_minus(cube)
+        new_cube_list = {19:self.cube[21], 20:self.cube[24], 21:self.cube[27],
+                         22:self.cube[20], 23:self.cube[23], 24:self.cube[26],
+                         25:self.cube[19], 26:self.cube[22], 27:self.cube[25]}
+        for key in new_cube_list.keys():
+            self.cube[key]=new_cube_list[key]
+
+    def F_minus(self):
+        side_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        cube_list = [self.cube[i] for i in side_list]
+        box_list = [j for i in cube_list for j in i]
+        for i in range(self.range_rotate):
+            rate(self.speed_rotate)
+            for cube in box_list:
+                self.rotate_Y_minus(cube)
+        new_cube_list = {1:self.cube[3], 2:self.cube[6], 3:self.cube[9],
+                         4:self.cube[2], 5:self.cube[5], 6:self.cube[8],
+                         7:self.cube[1], 8:self.cube[4], 9:self.cube[7]}
+        for key in new_cube_list.keys():
+            self.cube[key]=new_cube_list[key]
+
+    def U_minus(self):
+        side_list = [1, 2, 3, 10, 11, 12, 19, 20, 21]
+        cube_list = [self.cube[i] for i in side_list]
+        box_list = [j for i in cube_list for j in i]
+        for i in range(self.range_rotate):
+            rate(self.speed_rotate)
+            for cube in box_list:
+                self.rotate_Z_minus(cube)
+        new_cube_list = {3:self.cube[21], 2:self.cube[12], 1:self.cube[3],
+                         12:self.cube[20], 11:self.cube[11], 10:self.cube[2],
+                         21:self.cube[19], 20:self.cube[10], 19:self.cube[1]}
+        for key in new_cube_list.keys():
+            self.cube[key]=new_cube_list[key]
+    
+    def D_minus(self):
+        side_list = [7, 8, 9, 16, 17, 18, 25, 26, 27]
+        cube_list = [self.cube[i] for i in side_list]
+        box_list = [j for i in cube_list for j in i]
+        for i in range(self.range_rotate):
+            rate(self.speed_rotate)
+            for cube in box_list:
+                self.rotate_Z_minus(cube)
+        new_cube_list = {7:self.cube[9], 8:self.cube[18], 9:self.cube[27],
+                         16:self.cube[8], 17:self.cube[17], 18:self.cube[26],
+                         25:self.cube[7], 26:self.cube[16], 27:self.cube[25]}
+        for key in new_cube_list.keys():
+            self.cube[key]=new_cube_list[key]
+            
