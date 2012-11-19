@@ -40,8 +40,10 @@ class Visualizer:
         if notification == 'bound_to_cube':
             self.bound_to_cube(sender)    
         if notification == 'rotated':
+            #self.refresh_state(args[0])
             self.animate(args)
-#            self.refresh_state(sender)
+            #self.refresh_state(sender)
+
 
     def animate(self, args):
         if args[1] == 'L+': self.L_plus()
@@ -384,7 +386,6 @@ class Visualizer:
 
     
     def bound_to_cube(self, cube):
-        # reset to default sciene
         self.refresh_state(cube)
         
     
