@@ -3,6 +3,9 @@ import pdb
 __author__ = 'Oleksandr Korobov'
 
 # This file contains rubica cube solver logic based on A*
+# Please, be aware that heuristic here is primitiv and
+# Algorithm works almost as slow as brute-force Breadth-first search
+# This is just an example of possible approch.
 
 from Rubica import Cube
 
