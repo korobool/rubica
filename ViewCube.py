@@ -12,7 +12,7 @@ from pprint import pprint
 class Visualizer:
     
     def __init__(self):
-        self.speed_rotate = 200
+        self.speed_rotate = 50
         self.range_rotate = 50
         # self.axes()
         self.d = 0.05 # delta between boxes
@@ -31,22 +31,17 @@ class Visualizer:
 
     #self.observer().notify('rotated', sender = self, args = (previous_state, direction))
     def notify(self, notification, sender = None, args = None):
+
         if self.model is None and not sender is None:
             self.model = sender
         else:
             if self.model != sender:
                 return
-
-#        if notification == 'created':
-#            self.init_drawing(sender)
         if notification == 'bound_to_cube':
-            if self.cube != {}:
-                self.bound_to_cube(sender.fringe)
-            else:
-                print("Init drawing window and subsystem needed!")
+            self.bound_to_cube(sender)    
         if notification == 'rotated':
             self.animate(args)
-            self.bound_to_cube(sender.fringe)
+#            self.refresh_state(sender)
 
     def animate(self, args):
         if args[1] == 'L+': self.L_plus()
@@ -61,7 +56,7 @@ class Visualizer:
         if args[1] == 'F-': self.F_minus()
         if args[1] == 'U-': self.U_minus()
         if args[1] == 'D-': self.D_minus()
-            
+                    
     def init_drawing(self):
         color_height = 0.01
         color_wide = 0.9
@@ -338,24 +333,29 @@ class Visualizer:
         self.cube[26] = [box26, box26_1, box26_2]
         self.cube[27] = [box27, box27_1, box27_2, box27_3]
     
-    def bound_to_cube(self, cube):
+    def refresh_state(self, cube):
+        color_cube = {'back':[[],[],[]],
+                      'bottom':[[],[],[]],
+                      'front':[[],[],[]],
+                      'left':[[],[],[]],
+                      'right':[[],[],[]],
+                      'top':[[],[],[]]}
         # Set colors instead of strings
-        for key in cube.keys():
+        for key in cube.fringe.keys():
             for i in range(3):
                 for j in range(3):
-                    if cube[key][i][j][0] == 'F':
-                        cube[key][i][j] = color.red
-                    if cube[key][i][j][0] == 'R':
-                        cube[key][i][j] = color.green
-                    if cube[key][i][j][0] == 'L':
-                        cube[key][i][j] = color.blue
-                    if cube[key][i][j][0] == 'T':
-                        cube[key][i][j] = color.yellow
-                    if cube[key][i][j][0] == 'b':
-                        cube[key][i][j] = color.white
-                    if cube[key][i][j][0] == 'B':
-                        cube[key][i][j] = color.orange
-        pprint(cube)
+                    if cube.fringe[key][i][j][0] == 'F':
+                        color_cube[key][i].append(color.red)#[j] = color.red
+                    if cube.fringe[key][i][j][0] == 'R':
+                        color_cube[key][i].append(color.green)#[j] = color.green
+                    if cube.fringe[key][i][j][0] == 'L':
+                        color_cube[key][i].append(color.blue)#[j] = color.blue
+                    if cube.fringe[key][i][j][0] == 'T':
+                        color_cube[key][i].append(color.yellow)#[j] = color.yellow
+                    if cube.fringe[key][i][j][0] == 'b':
+                        color_cube[key][i].append(color.white)#[j] = color.white
+                    if cube.fringe[key][i][j][0] == 'B':
+                        color_cube[key][i].append(color.orange)#[j] = color.orange
         # Create self.cube dictionary
         proxy_cube = {'back':[[self.cube[25][3],self.cube[26][2],self.cube[27][3]],
                                [self.cube[22][2],self.cube[23][1],self.cube[24][2]],
@@ -380,7 +380,13 @@ class Visualizer:
         for key in proxy_cube.keys():
             for i in range(3):
                 for j in range(3):
-                    proxy_cube[key][i][j].color = cube[key][i][j]
+                    proxy_cube[key][i][j].color = color_cube[key][i][j]
+
+    
+    def bound_to_cube(self, cube):
+        # reset to default sciene
+        self.refresh_state(cube)
+        
     
     def rotate_X_plus(self, figure):
         figure.rotate(angle=-pi/(self.range_rotate*2), axis=vector((1,0,0)),
