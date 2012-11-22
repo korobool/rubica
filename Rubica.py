@@ -2,8 +2,6 @@ __author__ = 'oleksandr'
 
 import copy
 import random
-import weakref
-
 
 class Cube():
     __global_visualizer = None
