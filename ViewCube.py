@@ -1,4 +1,4 @@
-__author__ = 'oleksandr'
+__author__ = 'Igor Yeryomin'
 
 # The idea of this class is to visualize cubic rubica states and transformations
 # using VPython or pygame or something else. Cube class supports observer object 
