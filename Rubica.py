@@ -241,24 +241,6 @@ class Cube():
     def is_equal_to(self, cube):
         return self.get_distance(cube) == 0
 
-    @classmethod
-    def get_fringes_difference(cls, f1, f2):
-        diff = 0
-        for line in range(len(f1)):
-            for cell in range(len(f1[line])):
-                if f1[line][cell] != f2[line][cell]:
-                    diff += 1
-        return diff
-
-    @classmethod
-    def get_fringes_color_difference(cls, f1, f2):
-        diff = 0
-        for line in range(len(f1)):
-            for cell in range(len(f1[line])):
-                if f1[line][cell][0] != f2[line][cell][0]:
-                    diff += 1
-        return diff
-
     def randomize(self):
         count = random.randint(30, 100)
         for r in range(count):
@@ -272,34 +254,13 @@ class Cube():
         self.fringe['back'] = Cube.__gen_fringe('B')
         self.fringe['left'] = Cube.__gen_fringe('L')
         self.fringe['right'] = Cube.__gen_fringe('R')
+
     def print_cube(self):
         print '________________________________________________________'
         Cube.print_3(Cube.__gen_fringe(' '), self.fringe['top'], Cube.__gen_fringe(' '))
         Cube.print_3(self.fringe['left'], self.fringe['front'], self.fringe['right'])
         Cube.print_3(Cube.__gen_fringe(' '), self.fringe['bottom'], Cube.__gen_fringe(' '))
         Cube.print_3(Cube.__gen_fringe(' '), self.fringe['back'], Cube.__gen_fringe(' '))
-
-
-
-    @classmethod
-    def __gen_fringe(cls, color):
-        if color != ' ':
-            return  [[color + '1', color + '2', color + '3'],\
-                    [color + '4', color + '5', color + '6'],\
-                    [color + '7', color + '8', color + '9']]
-        else:
-            return [['  ', '  ', '  '],\
-                    ['  ', '  ', '  '],\
-                    ['  ', '  ', '  ']]
-
-    def solve(self):
-        pass
-
-    @classmethod
-    def print_3(cls, f1, f2, f3):
-        print f1[0], f2[0], f3[0]
-        print f1[1], f2[1], f3[1]
-        print f1[2], f2[2], f3[2]
 
     def copy(self):
         return copy.deepcopy(self)
@@ -321,3 +282,41 @@ class Cube():
 
         if not Cube.__global_visualizer is None:
             Cube.__global_visualizer.notify('bound_to_cube', sender = self)
+
+    @classmethod
+    def get_fringes_difference(cls, f1, f2):
+        diff = 0
+        for line in range(len(f1)):
+            for cell in range(len(f1[line])):
+                if f1[line][cell] != f2[line][cell]:
+                    diff += 1
+        return diff
+
+    @classmethod
+    def get_fringes_color_difference(cls, f1, f2):
+        diff = 0
+        for line in range(len(f1)):
+            for cell in range(len(f1[line])):
+                if f1[line][cell][0] != f2[line][cell][0]:
+                    diff += 1
+        return diff
+
+    @classmethod
+    def __gen_fringe(cls, color):
+        if color != ' ':
+            return  [[color + '1', color + '2', color + '3'],\
+                    [color + '4', color + '5', color + '6'],\
+                    [color + '7', color + '8', color + '9']]
+        else:
+            return [['  ', '  ', '  '],\
+                    ['  ', '  ', '  '],\
+                    ['  ', '  ', '  ']]
+
+    def solve(self):
+        pass
+
+    @classmethod
+    def print_3(cls, f1, f2, f3):
+        print f1[0], f2[0], f3[0]
+        print f1[1], f2[1], f3[1]
+        print f1[2], f2[2], f3[2]

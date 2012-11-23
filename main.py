@@ -14,16 +14,14 @@ cube = Rubica.Cube()
 
 old_cube = cube.copy()
 
-cube.print_cube()
-
 cube.bind_visualizer(ViewCube.Visualizer())
 
 cube.rotate('R-')
-cube.rotate('U-')
+cube.rotate('U+')
 cube.rotate('L+')
 cube.rotate('D+')
 
+old_cube.print_cube()
 cube.print_cube()
-
 print solve_cube(cube)
 
