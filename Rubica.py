@@ -16,10 +16,19 @@ class Cube():
 
         self.previous_state = self.copy()
 
+        # For A* only.
         self.h = -1
         self.g = -1
         self.f = -1
         self.parent_direction = None
+
+    def __init__fringes(self):
+        self.fringe['top'] = Cube.__gen_fringe('T')
+        self.fringe['front'] = Cube.__gen_fringe('F')
+        self.fringe['bottom'] = Cube.__gen_fringe('b')
+        self.fringe['back'] = Cube.__gen_fringe('B')
+        self.fringe['left'] = Cube.__gen_fringe('L')
+        self.fringe['right'] = Cube.__gen_fringe('R')
 
     def rotate(self, direction, is_recursive_call = False):
         previous_state = self.copy()
@@ -247,14 +256,6 @@ class Cube():
             command = self.directions[random.randint(0, len(self.directions) - 1)]
             self.rotate(command)
 
-    def __init__fringes(self):
-        self.fringe['top'] = Cube.__gen_fringe('T')
-        self.fringe['front'] = Cube.__gen_fringe('F')
-        self.fringe['bottom'] = Cube.__gen_fringe('b')
-        self.fringe['back'] = Cube.__gen_fringe('B')
-        self.fringe['left'] = Cube.__gen_fringe('L')
-        self.fringe['right'] = Cube.__gen_fringe('R')
-
     def print_cube(self):
         print '________________________________________________________'
         Cube.print_3(Cube.__gen_fringe(' '), self.fringe['top'], Cube.__gen_fringe(' '))
@@ -268,13 +269,13 @@ class Cube():
     def get_distance(self, cube):
         cube_diff = 0
         for f in self.fringe.keys():
-            cube_diff += Cube.get_fringes_difference(self.fringe[f], cube.fringe[f])
+            cube_diff += Cube.__get_fringes_difference(self.fringe[f], cube.fringe[f])
         return cube_diff
 
     def get_color_distance(self, cube):
         cube_diff = 0
         for f in self.fringe.keys():
-            cube_diff += Cube.get_fringes_color_difference(self.fringe[f], cube.fringe[f])
+            cube_diff += Cube.__get_fringes_color_difference(self.fringe[f], cube.fringe[f])
         return cube_diff
 
     def bind_visualizer(self, observer):
@@ -284,7 +285,7 @@ class Cube():
             Cube.__global_visualizer.notify('bound_to_cube', sender = self)
 
     @classmethod
-    def get_fringes_difference(cls, f1, f2):
+    def __get_fringes_difference(cls, f1, f2):
         diff = 0
         for line in range(len(f1)):
             for cell in range(len(f1[line])):
@@ -293,7 +294,7 @@ class Cube():
         return diff
 
     @classmethod
-    def get_fringes_color_difference(cls, f1, f2):
+    def __get_fringes_color_difference(cls, f1, f2):
         diff = 0
         for line in range(len(f1)):
             for cell in range(len(f1[line])):
@@ -311,9 +312,6 @@ class Cube():
             return [['  ', '  ', '  '],\
                     ['  ', '  ', '  '],\
                     ['  ', '  ', '  ']]
-
-    def solve(self):
-        pass
 
     @classmethod
     def print_3(cls, f1, f2, f3):
