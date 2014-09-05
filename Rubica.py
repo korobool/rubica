@@ -1,5 +1,3 @@
-__author__ = 'oleksandr'
-
 import copy
 import random
 
